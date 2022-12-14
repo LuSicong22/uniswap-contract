@@ -20,10 +20,11 @@ contract SingleSwap {
     ISwapRouter public immutable swapRouter = ISwapRouter(routerAddress);
 
     address public constant LINK = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
-    address public constant USDC = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
+    address public constant WETH = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
 
-    IERC public linkToken = IERC20(LINK);
+    IERC20 public linkToken = IERC20(LINK);
 
+    // For this example, we will set the pool fee to 0.3%.
     uint24 public constant poolFee = 3000;
 
     constructor() {}
@@ -61,7 +62,7 @@ contract SingleSwap {
                 tokenOut: WETH,
                 fee: poolFee,
                 recipient: address(this),
-                deadlinke: block.timestamp,
+                deadline: block.timestamp,
                 amountOut: amountOut,
                 amountInMaximum: amountInMaximum,
                 sqrtPriceLimitX96: 0
